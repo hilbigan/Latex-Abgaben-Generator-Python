@@ -1,4 +1,4 @@
-# Latex-Abgaben-Generator
+# Latex-Abgaben-Generator Python
 Erstellt automatisch Latex-Dateien für Abgaben
 
 # Anleitung
