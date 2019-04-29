@@ -5,6 +5,9 @@
 \newcounter{exnum}
 \stepcounter{exnum}
 
+\newboolean{blattNrInExs}
+\setboolean{blattNrInExs}{false}
+
 \ohead{\normalfont #3}
 
 \chead{\normalfont \textbf{#2}}
@@ -16,13 +19,29 @@
 
 \newcommand{\N}{\mathbb{N}}
 \newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
 
-\newcommand{\ex}[0]{
-\section*{Aufgabe \theexnum\stepcounter{exnum}}
+\setlist[enumerate,1]{label=\alph*)}
+\setlist[enumerate,2]{label=(\roman*)}
+
+\newcommand{\ex}[2][]{
+\ifthenelse{\equal{#1}{}}{}{\setcounter{exnum}{#1}}
+\ifthenelse{\equal{#2}{}}
+    {
+        \section*{Aufgabe \ifthenelse{\boolean{blattNrInExs}}{\theblattnr.}{}\theexnum\stepcounter{exnum}}
+    }{
+        \section*{\ifthenelse{\boolean{blattNrInExs}}{\theblattnr.}{}\theexnum\stepcounter{exnum} #2}
+    }
 }
 
-\newenvironment{exs}{
-\section*{Aufgabe \theexnum\stepcounter{exnum}}
+\newenvironment{exs}[2][]{
+\ifthenelse{\equal{#1}{}}{}{\setcounter{exnum}{#1}}
+\ifthenelse{\equal{#2}{}}
+    {
+        \section*{Aufgabe \ifthenelse{\boolean{blattNrInExs}}{\theblattnr.}{}\theexnum\stepcounter{exnum}}
+    }{
+        \section*{\ifthenelse{\boolean{blattNrInExs}}{\theblattnr.}{}\theexnum\stepcounter{exnum} #2}
+    }
 \begin{enumerate}[label=(\alph*)]
 }{
 \end{enumerate}
